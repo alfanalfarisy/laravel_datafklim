@@ -95,6 +95,7 @@
                 <td class="align-middle">{{ $data->RH13 }} </td>
                 <td class="align-middle">{{ $data->RH18 }} </td>
                 <td class="align-middle">{{ $data->Rhrata_rata }} </td>
+                <td class="align-middle">{{ $data->ffrata_rata }} </td>
                 <td class="align-middle">{{ $data->arah_terbanyak }} </td>
                 <td class="align-middle">{{ $data->dd }} </td>
                 <td class="align-middle">{{ $data->ffmax }} </td>
