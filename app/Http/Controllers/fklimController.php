@@ -12,66 +12,27 @@ class fklimController extends Controller
     public function __construct(){
         $this->fklim = new fklim();
         
-    }
-    
-    public function dataByDate($tanggal)
-    {
-        $data_bulan = fklim::where('Tanggal', date($tanggal))->get();
-        if ($data_bulan) {
-            return response()->json([
-                'status'  => true,
-                'message' => 'Data ditemukan',
-                'data'    => $data_bulan
-            ]);
-        } else {
-            return response()->json([
-                'status'  => false,
-                'message' => 'Data tidak ditemukan',
-                'data'    => []
-            ]);
-        }
-    }
-
-    public function dataByRangeDate($startdate,$enddate)
-    {
-        $data_bulan = fklim::whereBetween('Tanggal', [date($startdate),date($enddate)])->get();
-        if ($data_bulan) {
-            return response()->json([
-                'status'  => true,
-                'message' => 'Data ditemukan',
-                'data'    => $data_bulan
-            ]);
-        } else {
-            return response()->json([
-                'status'  => false,
-                'message' => 'Data tidak ditemukan',
-                'data'    => []
-            ]);
-        }
-    
-    }
-
-
+    }  
     public function index(){
         //ambil data dari table surat masuk
-        // $suratmasuk = surat masuk::with('Kecamatan')->paginate(5);
-    //    $data =[
-    //     'fklim' => $this -> fklim -> allData(),
+        // $fklim =fklim::with('Kecamatan')->paginate(5);
+       $response =[
+        'fklim' => $this -> fklim -> allData(),
            
-    //    ];
-    //    return view('fklim', [
-    //     'fklim' => DB::table('fklim')->Paginate(15)
-    // ]);
+       ];
+       return view('fklim', [
+        'fklim' => DB::table('fklim')->Paginate(15)
+    ]);
     // }
 
     // public function tambah(){
         
     //     return view('createfklim');
-    $fklim = fklim::orderBy('Tanggal', 'DESC')->get();
-        $response = [
-            'message' => 'List Fklim order by Tanggal',
-            'data' => $fklim
-        ];
+    // $fklim = fklim::orderBy('Tanggal', 'DESC')->get();
+    //     $response = [
+    //         'message' => 'List Fklim order by Tanggal',
+    //         'data' => $fklim
+    //     ];
 
         return response()->json($response, Response::HTTP_OK);
     }

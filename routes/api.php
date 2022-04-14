@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\fklim;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\fklimController;
+use App\Http\Controllers\historyController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,7 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/fklim', [fklimController::class, 'index']);
-// Route::post('/fklim', [fklimController::class, 'store']);
 
 Route::post('/fklim', function (){
       return fklim::create(request()->all());
