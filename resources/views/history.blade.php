@@ -31,7 +31,7 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
-              <button class="btn btn-light">Convert to CSV</button>
+              <a href="/export" class="btn btn-light">Convert to CSV</a>
             </form>
           </div>
         </div>
@@ -127,3 +127,49 @@
 </div>
 
 @endsection
+{{-- <script>
+  $(document).ready(function(){
+   $('.form-group').datepicker({
+    todayBtn:'linked',
+    format:'yyyy-mm-dd',
+    autoclose:true
+   });
+  
+   load_data();
+  
+   function load_data(startdate = '', enddate = '')
+   {
+    $('#order_table').DataTable({
+     processing: true,
+     serverSide: true,
+     ajax: {
+      url:'{{ route("History.HistoryExport") }}',
+      data:{startdate:startdate, enddate:enddate}
+     },
+    });
+   }
+  
+   $('#filter').click(function(){
+    var startdate = $('#startdate').val();
+    var enddate = $('#enddate').val();
+    if(startdate != '' &&  enddate != '')
+    {
+     $('#order_table').DataTable().destroy();
+     load_data(startdate, enddate);
+    }
+    else
+    {
+     alert('Both Date is required');
+    }
+   });
+  
+   $('#refresh').click(function(){
+    $('#startdate').val('');
+    $('#enddate').val('');
+    $('#order_table').DataTable().destroy();
+    load_data();
+   });
+  
+  });
+  </script>
+   --}}

@@ -24,5 +24,6 @@ use App\Http\Controllers\historyController;
 Route::get('/', [fklimController::class, 'index'] );
 Route::get('/history', [historyController::class, 'index'] );
 Route::post('/history', [historyController::class, 'getHistory']);
+Route::get('/export', [historyController::class, 'HistoryExport']);
 // Route::get('/createfklim','App\Http\Controllers\fklimController@tambah');
 // Route::post('/fklim/store','App\Http\Controllers\fklimController@store');

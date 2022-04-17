@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\history;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\CursorPaginator;
+use App\Exports\HistoryExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\Response;
 
 class historyController extends Controller
@@ -84,4 +86,52 @@ class historyController extends Controller
             ]);
         }
     }
+
+    public function HistoryExport(Request $request){
+        // $startdate = $request->input('startdate');
+        // $enddate = $request->input('enddate');
+        // $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
+        // Excel::create('PostsReport', function($excel) 
+        // {
+        //     $excel->sheet('New sheet', function($sheet) 
+        //     {
+        //         $sheet->loadView('HistoryExport');
+        // //     });
+        // $startdate = $request->input('startdate');
+        // $enddate = $request->input('enddate');
+        // $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
+        // if ($data_bulan) {
+            
+        //     $data_bulan = fklim::select()
+        //     ->where('Tanggal', '>=', $startdate)
+        //     ->where('Tanggal','<=',$enddate)->get();
+        // } else {
+        //     return response()->json([
+        //         'status'  => false,
+        //         'message' => 'Data tidak ditemukan',
+        //         'data'    => []
+        //     ]);
+        // }
+
+        return Excel::download(new HistoryExport, 'fklim.csv');
+    
+      
+        //  if(request()->ajax())
+        //  {
+        //   if(!empty($request->startdate))
+        //   {
+        //    $data = DB::table('fklim')
+        //      ->whereBetween('Tanggal', array($request->startdate, $request->enddate))->get();
+        //   }
+        //   else
+        //   {
+        //    $data = DB::table('fklim')->get();
+        //   }
+        // //   return datatables()->of($data)->make(true);
+        //  }
+        //  return view('history');
+     
+   
+}
+
 }
