@@ -28,4 +28,5 @@ Route::post('/fklim', function (){
 Route::get('/fklim/{tanggal}', [fklimController::class, 'dataByDate']);
 Route::get('/fklim/range/{startDate}/{endDate}', [fklimController::class, 'dataByRangeDate']);
 Route::get('/fklim/{tanggal}', [fklimController::class, 'dataByDate']);
-
+Route::get('/createfklim','App\Http\Controllers\fklimController@tambah');
+Route::post('/fklim/store','App\Http\Controllers\fklimController@store');

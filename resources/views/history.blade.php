@@ -30,8 +30,8 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <a href="/export" class="btn btn-light">Convert to CSV</a>
+              <input type="submit" class="btn btn-primary" name="viewData" value="ViewData"/>
+              <input type="submit" class="btn btn-primary" name="exportCsv" value="ExportCsv"/>
             </form>
           </div>
         </div>
@@ -41,9 +41,6 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Data Report</h4>
-        <p class="card-description">
-          Add class <code>.table</code>
-        </p>
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -89,7 +86,7 @@
                 <td class="align-middle">{{ $data->Tmin }} </td>
                 <td class="align-middle">{{ $data->CH }} </td>
                 <td class="align-middle">{{ $data->LPM }} </td>
-                <td class="align-middle">{{ $data->Cuaca_Khusus }} </td>
+                <td class="align-middle text-center">{{ $data->Cuaca_Khusus }} </td>
                 <td class="align-middle">{{ $data->QFE }} </td>
                 <td class="align-middle">{{ $data->RH07 }} </td>
                 <td class="align-middle">{{ $data->RH13 }} </td>
@@ -119,57 +116,11 @@
   <!-- partial:../../partials/_footer.html -->
   <footer class="footer">
     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-      <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-      <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+      <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyrights © BMKG Juanda 1 Juanda. All Rights Reserved.  </span>
+ 
     </div>
   </footer>
   <!-- partial -->
 </div>
 
 @endsection
-{{-- <script>
-  $(document).ready(function(){
-   $('.form-group').datepicker({
-    todayBtn:'linked',
-    format:'yyyy-mm-dd',
-    autoclose:true
-   });
-  
-   load_data();
-  
-   function load_data(startdate = '', enddate = '')
-   {
-    $('#order_table').DataTable({
-     processing: true,
-     serverSide: true,
-     ajax: {
-      url:'{{ route("History.HistoryExport") }}',
-      data:{startdate:startdate, enddate:enddate}
-     },
-    });
-   }
-  
-   $('#filter').click(function(){
-    var startdate = $('#startdate').val();
-    var enddate = $('#enddate').val();
-    if(startdate != '' &&  enddate != '')
-    {
-     $('#order_table').DataTable().destroy();
-     load_data(startdate, enddate);
-    }
-    else
-    {
-     alert('Both Date is required');
-    }
-   });
-  
-   $('#refresh').click(function(){
-    $('#startdate').val('');
-    $('#enddate').val('');
-    $('#order_table').DataTable().destroy();
-    load_data();
-   });
-  
-  });
-  </script>
-   --}}

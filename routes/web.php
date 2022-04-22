@@ -13,17 +13,11 @@ use App\Http\Controllers\historyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/history', function () {
-//     return view('history');
-// });
-
-// // Route::get('/createfklim', function () {
-// //     return view('createfklim');
-// // });
-
 Route::get('/', [fklimController::class, 'index'] );
 Route::get('/history', [historyController::class, 'index'] );
 Route::post('/history', [historyController::class, 'getHistory']);
-Route::get('/export', [historyController::class, 'HistoryExport']);
-// Route::get('/createfklim','App\Http\Controllers\fklimController@tambah');
-// Route::post('/fklim/store','App\Http\Controllers\fklimController@store');
+Route::get('/createfklim', function () {
+    return view('createfklim');
+});
+Route::get('/createfklim','App\Http\Controllers\fklimController@tambah');
+Route::post('/fklim/store','App\Http\Controllers\fklimController@store');

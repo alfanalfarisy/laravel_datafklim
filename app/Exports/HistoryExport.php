@@ -2,7 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\history;
+use App\Models\fklim;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -10,6 +11,14 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Events\AfterSheet;
 class HistoryExport implements FromCollection, WithMapping ,WithHeadings,ShouldAutoSize
 {
+    use Exportable; 
+    protected $data_bulan;
+
+    public function __construct($startdate,$enddate){
+            $this->startdate=$startdate; 
+            $this->enddate=$enddate;
+    }
+
     public function map($fklim): Array
     {
             return [
@@ -84,6 +93,9 @@ class HistoryExport implements FromCollection, WithMapping ,WithHeadings,ShouldA
     */
     public function collection()
     {
-        return history::all();
+           
+        $startdate=date($this->startdate);
+        $enddate=date($this->enddate);
+        return fklim::whereBetween('Tanggal', [$startdate, $enddate])->get();
     }
 }

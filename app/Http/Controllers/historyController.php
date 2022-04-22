@@ -57,8 +57,6 @@ class historyController extends Controller
 
     public function index()
     {
-        //ambil data dari table surat masuk
-        // $fklim =fklim::with('Kecamatan')->paginate(5);
         $response = [
             'fklim' => $this->fklim->allData(),
 
@@ -74,64 +72,35 @@ class historyController extends Controller
         $startdate = $request->input('startdate');
         $enddate = $request->input('enddate');
         $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
-        if ($data_bulan) {
-            return view('history', [
-                'fklim' => fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->Paginate(15)
-            ]);
-        } else {
-            return response()->json([
-                'status'  => false,
-                'message' => 'Data tidak ditemukan',
-                'data'    => []
-            ]);
+        if($request->input('exportCsv')){
+            if ($data_bulan) {
+                return Excel::download(new HistoryExport($startdate,$enddate), 'fklim.csv');
+            } else {
+                return response()->json([
+                        'status'  => false,
+                        'message' => 'Data tidak ditemukan',
+                        'data'    => []
+                        
+                    ]);
+                }
         }
+        if($request->input('viewData')){
+            if ($data_bulan) {
+                return view('history', [
+                    'fklim' => fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->Paginate(15)
+                ]);
+            } else {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Data tidak ditemukan',
+                    'data'    => []
+                ]);
+            }
+        }
+
+
     }
 
-    public function HistoryExport(Request $request){
-        // $startdate = $request->input('startdate');
-        // $enddate = $request->input('enddate');
-        // $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
-        // Excel::create('PostsReport', function($excel) 
-        // {
-        //     $excel->sheet('New sheet', function($sheet) 
-        //     {
-        //         $sheet->loadView('HistoryExport');
-        // //     });
-        // $startdate = $request->input('startdate');
-        // $enddate = $request->input('enddate');
-        // $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
-        // if ($data_bulan) {
-            
-        //     $data_bulan = fklim::select()
-        //     ->where('Tanggal', '>=', $startdate)
-        //     ->where('Tanggal','<=',$enddate)->get();
-        // } else {
-        //     return response()->json([
-        //         'status'  => false,
-        //         'message' => 'Data tidak ditemukan',
-        //         'data'    => []
-        //     ]);
-        // }
-
-        return Excel::download(new HistoryExport, 'fklim.csv');
-    
-      
-        //  if(request()->ajax())
-        //  {
-        //   if(!empty($request->startdate))
-        //   {
-        //    $data = DB::table('fklim')
-        //      ->whereBetween('Tanggal', array($request->startdate, $request->enddate))->get();
-        //   }
-        //   else
-        //   {
-        //    $data = DB::table('fklim')->get();
-        //   }
-        // //   return datatables()->of($data)->make(true);
-        //  }
-        //  return view('history');
-     
-   
-}
 
 }
+

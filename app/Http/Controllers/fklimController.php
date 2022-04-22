@@ -14,8 +14,6 @@ class fklimController extends Controller
         
     }  
     public function index(){
-        //ambil data dari table surat masuk
-        // $fklim =fklim::with('Kecamatan')->paginate(5);
        $response =[
         'fklim' => $this -> fklim -> allData(),
            
@@ -23,23 +21,17 @@ class fklimController extends Controller
        return view('fklim', [
         'fklim' => DB::table('fklim')->Paginate(15)
     ]);
-    // }
-
-    // public function tambah(){
-        
-    //     return view('createfklim');
-    // $fklim = fklim::orderBy('Tanggal', 'DESC')->get();
-    //     $response = [
-    //         'message' => 'List Fklim order by Tanggal',
-    //         'data' => $fklim
-    //     ];
 
         return response()->json($response, Response::HTTP_OK);
     }
 
+    public function tambah(){
+        return view('createfklim');
+    }
 
     public function store(Request $request){
         $fklim = new fklim; 
+        $fklim->Tanggal = $request->Tanggal;
         $fklim->Tahun = $request->Tahun;
         $fklim->Bulan = $request->Bulan ;
         $fklim->Tanggal_1 = $request->Tanggal_1;
