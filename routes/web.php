@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\fklimController;
-use App\Http\Controllers\historyController;
+use App\Http\Controllers\FklimController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +13,9 @@ use App\Http\Controllers\historyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [fklimController::class, 'index'] );
-Route::get('/history', [historyController::class, 'index'] );
-Route::post('/history', [historyController::class, 'getHistory']);
+Route::get('/', [FklimController::class, 'index'] );
+
+Route::post('/fklim', [FklimController::class, 'getFklim']);
 Route::get('/createfklim', function () {
     return view('createfklim');
 });

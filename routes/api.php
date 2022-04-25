@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\fklim;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\fklimController;
-use App\Http\Controllers\historyController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

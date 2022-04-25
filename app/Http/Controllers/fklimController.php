@@ -1,28 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
 use App\Models\fklim;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\CursorPaginator;
-use Symfony\Component\HttpFoundation\Response;
+use App\Exports\HistoryExport;
+use Maatwebsite\Excel\Facades\Excel;
 
-class fklimController extends Controller
+
+class FklimController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->fklim = new fklim();
-        
-    }  
-    public function index(){
-       $response =[
-        'fklim' => $this -> fklim -> allData(),
-           
-       ];
-       return view('fklim', [
-        'fklim' => DB::table('fklim')->Paginate(15)
-    ]);
-
-        return response()->json($response, Response::HTTP_OK);
     }
 
     public function tambah(){
@@ -73,4 +64,90 @@ class fklimController extends Controller
             ";
         }
     }
+
+    public function dataByDate($tanggal)
+    {
+        $data_bulan = fklim::where('Tanggal', date($tanggal))->get();
+        if ($data_bulan) {
+            return response()->json([
+                'status'  => true,
+                'message' => 'Data ditemukan',
+                'data'    => $data_bulan
+            ]);
+        } else {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Data tidak ditemukan',
+                'data'    => []
+            ]);
+        }
+    }
+
+    public function dataByRangeDate($startdate, $enddate)
+    {
+        $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
+        if ($data_bulan) {
+            return response()->json([
+                'status'  => true,
+                'message' => 'Data ditemukan',
+                'data'    => $data_bulan
+            ]);
+        } else {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Data tidak ditemukan',
+                'data'    => []
+            ]);
+        }
+    }
+
+
+    public function index()
+    {
+        $response = [
+            'fklim' => $this->fklim->allData(),
+
+        ];
+        return view('fklim', [
+            'fklim' => DB::table('fklim')->Paginate(15)
+        ]);
+        
+    }
+    
+    public function getFklim(Request $request)
+    {
+        $startdate = $request->input('startdate');
+        $enddate = $request->input('enddate');
+        $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
+        if($request->input('exportCsv')){
+            if ($data_bulan) {
+                return Excel::download(new HistoryExport($startdate,$enddate), 'fklim.csv');
+            } else {
+                return response()->json([
+                        'status'  => false,
+                        'message' => 'Data tidak ditemukan',
+                        'data'    => []
+                        
+                    ]);
+                }
+        }
+        if($request->input('viewData')){
+            if ($data_bulan) {
+                return view('fklim', [
+                    'fklim' => fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->Paginate(15)
+                ]);
+            } else {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Data tidak ditemukan',
+                    'data'    => []
+                ]);
+            }
+        }
+
+
+    }
+
+
 }
+

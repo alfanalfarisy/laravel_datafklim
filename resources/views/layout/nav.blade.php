@@ -45,15 +45,9 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/">
-              <i class="icon-grid-2 menu-icon"></i>
-              <span class="menu-title">Data Fklim</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link " href="/history">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Data Report</span>
+              <span class="menu-title">Data Fklim</span>
             </a>
           </li>
         </ul>
