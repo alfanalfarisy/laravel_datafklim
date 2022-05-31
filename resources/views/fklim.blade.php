@@ -13,6 +13,32 @@
             <form class="form-sample" action="{{url('fklim')}}" method="post">
               @csrf
               <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-3 col-form-label">Variable  : </label>
+                      <select name="fklim" class="form-control">
+                        <option value="">-pilih-</option>
+                        <option value="T07">T07</option>
+                        <option value="T13">T13</option>
+                        <option value="T18">T18</option>
+                        <option value="Trata_rata">Trata_rata</option>
+                        <option value="Tmax">Tmax</option>
+                        <option value="Tmin">Tmin</option>
+                        <option value="CH">CH</option>
+                        <option value="LPM ">LPM </option>
+                        <option value="Cuaca_Khusus ">Cuaca_Khusus</option>
+                        <option value="RH07">RH07</option>
+                        <option value="RH13">RH13</option>
+                        <option value="RH18">RH18 </option>
+                        <option value="Rhrata_rata">Rhrata_rata</option>
+                        <option value="ffrata_rata">ffrata_rata</option>
+                        <option value="dd">dd</option>
+                        <option value="ffmax">ffmax</option>
+                        <option value="arah">arah</option>
+                        <option value="ddmax">ddmax</option>
+                      </select>
+                    </div>
+                  </div>
                 <div class="col-md-6">
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Date From  : </label>
@@ -29,9 +55,16 @@
                     </div>
                   </div>
                 </div>
+                <label class="col-sm-3 col-form-label">Rata-Rata : </label>
+                <div class="col-sm-6">
+                  
+                  <input type="text" name="avg" class="form-control" />
+                </div>
               </div>
+              <br><br>
               <input type="submit" class="btn btn-primary" name="viewData" value="ViewData"/>
               <input type="submit" class="btn btn-primary" name="exportCsv" value="ExportCsv"/>
+              <input type="submit" class="btn btn-primary" name="avg" value="Rata-Rata"/>
             </form>
           </div>
         </div>

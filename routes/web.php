@@ -14,8 +14,9 @@ use App\Http\Controllers\FklimController;
 |
 */
 Route::get('/', [FklimController::class, 'index'] );
-
 Route::post('/fklim', [FklimController::class, 'getFklim']);
+Route::get('/fklim', [FklimController::class, 'getFklim']);
+Route::get('/getproses', [FklimController::class, 'getproses']);
 Route::get('/createfklim', function () {
     return view('createfklim');
 });

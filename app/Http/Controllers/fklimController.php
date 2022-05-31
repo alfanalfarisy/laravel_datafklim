@@ -21,7 +21,7 @@ class FklimController extends Controller
     }
 
     public function store(Request $request){
-        $fklim = new fklim; 
+        $fklim = new fklim;
         $fklim->Tanggal = $request->Tanggal;
         $fklim->Tahun = $request->Tahun;
         $fklim->Bulan = $request->Bulan ;
@@ -116,6 +116,7 @@ class FklimController extends Controller
     
     public function getFklim(Request $request)
     {
+        
         $startdate = $request->input('startdate');
         $enddate = $request->input('enddate');
         $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
@@ -130,6 +131,27 @@ class FklimController extends Controller
                         
                     ]);
                 }
+        }
+         
+        if($request->input('avg')){
+            $startdate = $request->input('startdate');
+            $enddate = $request->input('enddate');
+            $select = $request->input('fklim');
+            $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
+            $sum=0;
+            foreach ($data_bulan as $item) {
+                $sum = $sum + (float)$item->$select;
+            }
+            $sumOf =$sum / count($data_bulan);
+           return view('/fklim')->with('rata :'.$sumOf);
+    
+            // return response()->json([
+            //     'status'  => false,
+            //     'message' => 'Data tidak ditemukan',
+            //     'data'    =>  $sumOf
+            // ]);
+             
+        
         }
         if($request->input('viewData')){
             if ($data_bulan) {
@@ -147,7 +169,28 @@ class FklimController extends Controller
 
 
     }
+    public function getproses(Request $request)
+    {
+        $startdate = '2021-01-05';
+        $enddate = '2022-01-01';
+        $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
+        
 
+        $sum=0;
+        foreach ($data_bulan as $item) {
+            $sum = $sum + (float)$item->T07; 
+
+        }
+        $sumOf =$sum / count($data_bulan);
+       
+
+        return response()->json([
+            'status'  => false,
+            'message' => 'Data tidak ditemukan',
+            'data'    =>  $sumOf
+        ]);
+         
+    }
 
 }
 
