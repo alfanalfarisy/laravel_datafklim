@@ -55,11 +55,16 @@
                     </div>
                   </div>
                 </div>
-                <label class="col-sm-3 col-form-label">Rata-Rata : </label>
+                @isset($rata)
+                
+                <label class="col-sm-3 col-form-label">Rata-Rata :   {{ $select }}</label>
+
+                @endisset
+                @isset($rata)
                 <div class="col-sm-6">
-                  
-                  <input type="text" name="avg" class="form-control" />
+                  <input readonly type="" name="avg" class="form-control" value="{{ $rata }}" />
                 </div>
+                @endisset
               </div>
               <br><br>
               <input type="submit" class="btn btn-primary" name="viewData" value="ViewData"/>

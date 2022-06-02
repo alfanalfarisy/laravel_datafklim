@@ -137,14 +137,16 @@ class FklimController extends Controller
             $startdate = $request->input('startdate');
             $enddate = $request->input('enddate');
             $select = $request->input('fklim');
-            $data_bulan = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)])->get();
+            $data_bydate = fklim::whereBetween('Tanggal', [date($startdate), date($enddate)]);
+            $data_bydateForAvg = $data_bydate->get();
+            $data_bydateForTbl = $data_bydate->paginate(15);
             $sum=0;
-            foreach ($data_bulan as $item) {
+            foreach ($data_bydateForAvg as $item) {
                 $sum = $sum + (float)$item->$select;
             }
-            $sumOf =$sum / count($data_bulan);
-           return view('/fklim')->with('rata :'.$sumOf);
-    
+            $sumOf =$sum / count($data_bydateForAvg);
+           return view('fklim',['rata'=>number_format($sumOf,0,'.',''),'fklim'=>$data_bydateForTbl, 'select'=>$select]);
+            
             // return response()->json([
             //     'status'  => false,
             //     'message' => 'Data tidak ditemukan',
