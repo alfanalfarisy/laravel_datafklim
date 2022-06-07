@@ -18,7 +18,7 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Tanggal</label>
                             <div class="col-sm-10">
-                              <input type="date" name="arah_terbanyak"class="form-control" />
+                              <input type="date" name="Tanggal"class="form-control" />
                             </div>
                           </div>
                         </div>

@@ -69,10 +69,40 @@
               <br><br>
               <input type="submit" class="btn btn-primary" name="viewData" value="ViewData"/>
               <input type="submit" class="btn btn-primary" name="exportCsv" value="ExportCsv"/>
+              {{-- <input type="submit" class="btn btn-primary" name="#" value="ImportCsv"/> --}}
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Import</a>
               <input type="submit" class="btn btn-primary" name="avg" value="Rata-Rata"/>
             </form>
           </div>
         </div>
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
+      </div>
+      <form action="/importExcel" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+          {{ csrf_field() }}
+          <div class="form-group">
+            <input type="file" name="file" required="required">
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Import</button>
+      </div>
+    </div>
+    </form>
+
+  </div>
+</div>
+
       </div>
       
   <div class="col-lg-12 grid-margin stretch-card">
