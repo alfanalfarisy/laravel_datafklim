@@ -17,6 +17,8 @@ Route::get('/', [FklimController::class, 'index'] );
 Route::post('/', [FklimController::class, 'getFklim']);
 Route::get('/fklim', [FklimController::class, 'getFklim']);
 Route::get('/getproses', [FklimController::class, 'getproses']);
+Route::post('/importExcel', [FklimController::class, 'importExcel'])->name('importExcel');
+
 Route::get('/createfklim', function () {
     return view('createfklim');
 });

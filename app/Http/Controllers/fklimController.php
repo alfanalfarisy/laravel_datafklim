@@ -6,6 +6,7 @@ use App\Models\fklim;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Exports\HistoryExport;
+use App\Imports\fklimImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -194,4 +195,12 @@ class FklimController extends Controller
          
     }
 
+    public function importExcel(Request $request){
+        $data = $request->file('file');
+        $namaFile = $data->getClientOriginalName();
+        $data ->move('fklim', $namaFile);
+
+        Excel::import(new fklimImport, \public_path('/fklim/'.$namaFile));
+        return \redirect()->back();
+    }
 }
