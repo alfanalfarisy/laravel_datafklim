@@ -68,10 +68,9 @@
               </div>
               <br><br>
               <input type="submit" class="btn btn-primary" name="viewData" value="ViewData"/>
-              <input type="submit" class="btn btn-primary" name="exportCsv" value="ExportCsv"/>
-              {{-- <input type="submit" class="btn btn-primary" name="#" value="ImportCsv"/> --}}
-              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Import</a>
               <input type="submit" class="btn btn-primary" name="avg" value="Rata-Rata"/>
+              <input type="submit" class="btn btn-primary" name="exportCsv" value="ExportCsv"/>
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">ImportCsv</a>
             </form>
           </div>
         </div>
@@ -109,9 +108,6 @@
       <div class="card-body">
         <h4 class="card-title">Data Fklim</h4>
         <div class="table-responsive">
-          <p>
-            <a href="createfklim" button type="button" class="btn btn-warning">Tambah Data</button></a>
-          <p>
           <table class="table">
             <thead>
               <tr>

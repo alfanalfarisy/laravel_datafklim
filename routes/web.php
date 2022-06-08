@@ -16,11 +16,4 @@ use App\Http\Controllers\FklimController;
 Route::get('/', [FklimController::class, 'index'] );
 Route::post('/', [FklimController::class, 'getFklim']);
 Route::get('/fklim', [FklimController::class, 'getFklim']);
-Route::get('/getproses', [FklimController::class, 'getproses']);
 Route::post('/importExcel', [FklimController::class, 'importExcel'])->name('importExcel');
-
-Route::get('/createfklim', function () {
-    return view('createfklim');
-});
-Route::get('/createfklim','App\Http\Controllers\fklimController@tambah');
-Route::post('/fklim/store','App\Http\Controllers\fklimController@store');
