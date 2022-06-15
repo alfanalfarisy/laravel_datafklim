@@ -135,6 +135,7 @@
                 <th>ffmax</th>
                 <th>Arah</th>
                 <th>ddmax</th>
+                <th>Hapus</th>
               </tr>
             </thead>
             @foreach($fklim as $data)
@@ -164,6 +165,16 @@
                 <td class="align-middle">{{ $data->ffmax }} </td>
                 <td class="align-middle">{{ $data->arah }} </td>
                 <td class="align-middle">{{ $data->ddmax }} </td>
+                <td>
+                  
+                  <form action="{{ url('trash'.$data->Tanggal) }}" method="GET" class="d-inline" onsubmit="return confirm('Hapus Data ?')">
+                    @method('trash')
+                    @csrf
+                    <button class="btn btn-danger btn-sm">
+                      <i class="fa fa-trash"></i></button>
+                        {{-- <i class="fa fa-trash"></i></button> --}}
+                </form>
+                </td>
               </tr>
               @endforeach
             </tbody>

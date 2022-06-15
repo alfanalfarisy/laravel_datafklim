@@ -203,4 +203,13 @@ class FklimController extends Controller
         Excel::import(new fklimImport, \public_path('/fklim/'.$namaFile));
         return \redirect()->back();
     }
+   // method untuk hapus data pegawai
+public function trash($tanggal)
+{
+	// menghapus data pegawai berdasarkan id yang dipilih
+	DB::table('fklim')->where('Tanggal',$tanggal)->delete();
+		
+	// alihkan halaman ke halaman pegawai
+    return \redirect()->back();
+}
 }
