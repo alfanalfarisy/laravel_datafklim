@@ -204,10 +204,12 @@ class FklimController extends Controller
         return \redirect()->back();
     }
    // method untuk hapus data pegawai
-public function trash($tanggal)
-{
+public function trash(Request $request)
+{   
+    $startdate = $request->input('startdate');
+    $enddate = $request->input('enddate');
 	// menghapus data pegawai berdasarkan id yang dipilih
-	DB::table('fklim')->where('Tanggal',$tanggal)->delete();
+	DB::table('fklim')->where('Tanggal', [date($startdate), date($enddate)])->delete();
 		
 	// alihkan halaman ke halaman pegawai
     return \redirect()->back();

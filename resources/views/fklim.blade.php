@@ -166,7 +166,6 @@
                 <td class="align-middle">{{ $data->arah }} </td>
                 <td class="align-middle">{{ $data->ddmax }} </td>
                 <td>
-                  
                   <form action="{{ url('trash'.$data->Tanggal) }}" method="GET" class="d-inline" onsubmit="return confirm('Hapus Data ?')">
                     @method('trash')
                     @csrf
